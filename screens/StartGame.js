@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
         marginTop: 100,
         marginHorizontal: 24,
         padding: 16,
-        backgroundColor: '#4e0329',
+        backgroundColor: '#3b021f',
         borderRadius: 8,
-        elevation: 4, // android only
-        shadowColor: '#000000', // ios only
+        elevation: 2, // android only
+        shadowColor: '#ffffff', // ios only
         shadowOffset: { width: 0, height: 2 }, // ios only
-        shadowRadius: 6, // ios only
-        shadowOpacity: 0.25, // ios only
+        shadowRadius: 4, // ios only
+        shadowOpacity: 0.1, // ios only
     },
     numberInput: {
         height: 48,
