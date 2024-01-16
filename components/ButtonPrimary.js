@@ -28,19 +28,20 @@ const styles = StyleSheet.create({
     buttonOuterContainer: {
         borderRadius: 32,
         margin: 8,
-        overflow: "hidden",
+        overflow: 'hidden',
     },
 
     buttonInnerContainer: {
-        backgroundColor: "#72063c",
-        padding: 16,
+        backgroundColor: '#72063c',
+        padding: 8,
+
         elevation: 4, // android only
     },
     buttonText: {
-        color: "#ffffff",
+        color: '#ffffff',
         fontSize: 20,
-        fontWeight: "bold",
-        textAlign: "center",
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     pressed: {
         opacity: 0.75,
