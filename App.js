@@ -6,6 +6,7 @@ import StartGame from "./screens/StartGame";
 
 export default function App() {
     return (
+        // Add LinearGradient component to the root of the app with expo
         <LinearGradient
             colors={["#4e0329", "#ddb52f"]}
             style={styles.rootScreen}
