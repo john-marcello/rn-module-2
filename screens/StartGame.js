@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import ButtonPrimary from "../components/ButtonPrimary";
 
+// start game screen
 function StartGame({}) {
     return (
         <View style={styles.inputContainer}>
