@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
+// play game screen
 function PlayGame() {
     return (
         <View style={styles.screen}>
