@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
-import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonPrimary from '../components/ui/ButtonPrimary';
 import Colors from '../constants/colors';
 
 // start game screen
