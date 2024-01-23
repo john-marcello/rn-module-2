@@ -4,7 +4,7 @@ import Colors from '../../constants/colors';
 function Title({ children }) {
     return (
         <View style={styles.titleView}>
-            <Text style={styles.titleText}>Opponent's Guess</Text>
+            <Text style={styles.titleText}>{children}</Text>
         </View>
     );
 }

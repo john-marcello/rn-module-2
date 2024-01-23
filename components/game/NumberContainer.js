@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
             borderColor: Colors.accentLight,
             padding: 16,
             borderRadius: 16,
-            margin: 16,
+            marginVertical: 16,
+            marginHorizontal: 24,
         },
         numberText: {
             color: Colors.accentLight,

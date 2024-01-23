@@ -1,8 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
-import Title from "../components/ui/Title";
+import { Alert, StyleSheet, View } from "react-native";
+
 import NumberContainer from "../components/game/NumberContainer.js";
+
+import Card from "../components/ui/Card.js";
+import Title from "../components/ui/Title";
+import InputHint from "../components/ui/InputHint.js";
 import ButtonPrimary from "../components/ui/ButtonPrimary.js";
+
 
 function generateRandomBetween(min, max, exclude) {
     const randNum = Math.floor(Math.random() * (max - min)) + min;
@@ -11,9 +16,7 @@ function generateRandomBetween(min, max, exclude) {
     } else {
         return randNum;
     }
-    
 }
-
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -21,16 +24,12 @@ let maxBoundary = 100;
 // play game screen
 function PlayGame({ userNumber, onGameOver }) {
     const initialGuess = useMemo(
-        () => generateRandomBetween(
-            minBoundary, 
-            maxBoundary, 
-            userNumber
-            ),
+        () => generateRandomBetween(minBoundary, maxBoundary, userNumber),
         []
     );
 
-    useMemo(() => console.log(userNumber),[]);
-    
+    useMemo(() => console.log(userNumber), []);
+
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
     useEffect(() => {
@@ -40,7 +39,6 @@ function PlayGame({ userNumber, onGameOver }) {
     }, [currentGuess, userNumber, onGameOver]);
 
     function nextGuessHandler(direction) {
-        
         if (
             (direction === "lower" && currentGuess < userNumber) ||
             (direction === "higher" && currentGuess > userNumber)
@@ -72,8 +70,8 @@ function PlayGame({ userNumber, onGameOver }) {
         <View style={styles.screen}>
             <Title>Opponent's Guess</Title>
             <NumberContainer>{currentGuess}</NumberContainer>
-            <View>
-                <Text>Higher or Lower?</Text>
+            <Card>
+                <InputHint>Higher or Lower?</InputHint>
                 <View>
                     <ButtonPrimary
                         onPress={nextGuessHandler.bind(this, "lower")}
@@ -86,7 +84,7 @@ function PlayGame({ userNumber, onGameOver }) {
                         +
                     </ButtonPrimary>
                 </View>
-            </View>
+            </Card>
         </View>
     );
 }
