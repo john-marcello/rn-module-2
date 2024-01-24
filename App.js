@@ -1,14 +1,21 @@
-import { useState } from "react";
-import { ImageBackground, SafeAreaView, StyleSheet, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { useState } from 'react';
+import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
-import StartGame from "./screens/StartGame";
-import PlayGame from "./screens/PlayGame";
-import GameOver from "./screens/GameOver";
+import StartGame from './screens/StartGame';
+import PlayGame from './screens/PlayGame';
+import GameOver from './screens/GameOver';
 
-import Colors from "./constants/colors";
+import { useFonts } from 'expo-font'
+import Colors from './constants/colors';
 
-export default function App() {
+export default function App() { 
+
+    useFonts({
+        'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+        'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    });
+v
     const [userNumber, setUserNumber] = useState();
     const [gameIsOver, setGameIsOver] = useState(true);
 
@@ -39,8 +46,8 @@ export default function App() {
         >
             <ImageBackground
                 accessibilityIgnoresInvertColors={true}
-                source={require("./assets/images/background.png")}
-                resizeMode="cover"
+                source={require('./assets/images/background.png')}
+                resizeMode='cover'
                 style={styles.rootScreen}
                 imageStyle={styles.backgroundImage}
             >

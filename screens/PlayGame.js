@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { useEffect, useMemo, useState } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-import NumberContainer from "../components/game/NumberContainer.js";
+import NumberContainer from '../components/game/NumberContainer.js';
 
-import Card from "../components/ui/Card.js";
-import Title from "../components/ui/Title";
-import InputHint from "../components/ui/InputHint.js";
-import ButtonPrimary from "../components/ui/ButtonPrimary.js";
+import Card from '../components/ui/Card.js';
+import Title from '../components/ui/Title';
+import InputHint from '../components/ui/InputHint.js';
+import ButtonPrimary from '../components/ui/ButtonPrimary.js';
 
 function generateRandomBetween(min, max, exclude) {
     const randNum = Math.floor(Math.random() * (max - min)) + min;
@@ -40,19 +40,19 @@ function PlayGame({ userNumber, onGameOver }) {
 
     function nextGuessHandler(direction) {
         if (
-            (direction === "lower" && currentGuess < userNumber) ||
-            (direction === "higher" && currentGuess > userNumber)
+            (direction === 'lower' && currentGuess < userNumber) ||
+            (direction === 'higher' && currentGuess > userNumber)
         ) {
-            Alert.alert("Don't lie!", "You know this is wrong...", [
+            Alert.alert('Don\'t lie!', 'You know this is wrong...', [
                 {
-                    text: "Sorry!",
-                    style: "cancel",
+                    text: 'Sorry!',
+                    style: 'cancel',
                 },
             ]);
             return;
         }
 
-        if (direction === "lower") {
+        if (direction === 'lower') {
             maxBoundary = currentGuess;
         } else {
             minBoundary = currentGuess + 1;
@@ -75,14 +75,14 @@ function PlayGame({ userNumber, onGameOver }) {
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
                         <ButtonPrimary
-                            onPress={nextGuessHandler.bind(this, "lower")}
+                            onPress={nextGuessHandler.bind(this, 'lower')}
                         >
                             <Ionicons name='md-remove' />
                         </ButtonPrimary>
                     </View>
                     <View style={styles.buttonContainer}>
                         <ButtonPrimary
-                            onPress={nextGuessHandler.bind(this, "higher")}
+                            onPress={nextGuessHandler.bind(this, 'higher')}
                         >
                             <Ionicons name='md-add' />
                         </ButtonPrimary>
