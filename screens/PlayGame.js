@@ -8,7 +8,6 @@ import Title from "../components/ui/Title";
 import InputHint from "../components/ui/InputHint.js";
 import ButtonPrimary from "../components/ui/ButtonPrimary.js";
 
-
 function generateRandomBetween(min, max, exclude) {
     const randNum = Math.floor(Math.random() * (max - min)) + min;
     if (randNum === exclude) {
@@ -71,18 +70,22 @@ function PlayGame({ userNumber, onGameOver }) {
             <Title>Opponent's Guess</Title>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card>
-                <InputHint>Higher or Lower?</InputHint>
-                <View>
-                    <ButtonPrimary
-                        onPress={nextGuessHandler.bind(this, "lower")}
-                    >
-                        -
-                    </ButtonPrimary>
-                    <ButtonPrimary
-                        onPress={nextGuessHandler.bind(this, "higher")}
-                    >
-                        +
-                    </ButtonPrimary>
+                <InputHint style={styles.hintText}>Higher or Lower?</InputHint>
+                <View style={styles.buttonsContainer}>
+                    <View style={styles.buttonContainer}>
+                        <ButtonPrimary
+                            onPress={nextGuessHandler.bind(this, "lower")}
+                        >
+                            -
+                        </ButtonPrimary>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <ButtonPrimary
+                            onPress={nextGuessHandler.bind(this, "higher")}
+                        >
+                            +
+                        </ButtonPrimary>
+                    </View>
                 </View>
             </Card>
         </View>
@@ -95,5 +98,17 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 16,
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+    },
+    buttonContainer: {
+        flex: 1,
+    },
+    hintText: {
+        marginBottom: 8,
+        
     },
 });
