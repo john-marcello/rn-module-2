@@ -10,12 +10,12 @@ import InputHint from '../components/ui/InputHint.js';
 import ButtonPrimary from '../components/ui/ButtonPrimary.js';
 
 function generateRandomBetween(min, max, exclude) {
-    const randNum = Math.floor(Math.random() * (max - min)) + min;
-    if (randNum === exclude) {
-        return generateRandomBetween(min, max, exclude);
-    } else {
-        return randNum;
-    }
+    let randNum;
+    do {
+        randNum = Math.floor(Math.random() * (max - min + 1)) + min;
+    } while (randNum === exclude);
+
+    return randNum;
 }
 
 let minBoundary = 1;
