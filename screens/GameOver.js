@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Title from '../components/ui/Title';
 import Colors from '../constants/colors';
 
+// adds game over screen    
 function GameOver() {
     return (
         <View style={styles.screen}>
