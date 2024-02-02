@@ -60,7 +60,6 @@ export default function App() {
             'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
             'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
         });
-        // console.log("Fonts loaded: ", fontsLoaded);
 
     if (!fontsLoaded) {
         return <Text>Loading...</Text>;
