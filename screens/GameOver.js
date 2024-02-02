@@ -1,9 +1,17 @@
+// dependencies
 import { Image, StyleSheet, Text, View } from 'react-native';
+
+// components
 import Title from '../components/ui/Title';
+import ButtonPrimary from '../components/ui/ButtonPrimary';
+
+// constants
 import Colors from '../constants/colors';
 
-// adds game over screen    
+// game over component
 function GameOver() {
+    
+    // render the game over screen
     return (
         <View style={styles.screen}>
             <Title>Game Over!</Title>
@@ -15,7 +23,11 @@ function GameOver() {
                 />
             </View>
             <View>
-                <Text>Phone need X tries to guess the number Y</Text>
+                <Text style={styles.summaryText}>
+                    Your phone needed <Text style={styles.accentText}>X</Text> tries to
+                    guess the number <Text style={styles.accentText}>Y</Text>
+                </Text>
+                <ButtonPrimary>Start Over</ButtonPrimary>
             </View>
         </View>
     );
@@ -39,8 +51,18 @@ styles = StyleSheet.create({
         overflow: 'hidden',
         margin: 32,
     },
-    image: { 
+    image: {
         width: '100%',
         height: '100%',
+    },
+    summaryText: {
+        fontFamily: 'OpenSans-Regular',
+        fontSize: 24,
+        textAlign: 'center',
+        marginVertical: 24,
+    },
+    accentText: {
+        fontFamily: 'OpenSans-Bold',
+        color: Colors.primaryDark,
     },
 });

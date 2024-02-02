@@ -1,28 +1,37 @@
+// dependencies
+
 import { useState } from 'react';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
 
+// components
 import Title from '../components/ui/Title';
 import Card from '../components/ui/Card';
 import InputHint from '../components/ui/InputHint';
 import ButtonPrimary from '../components/ui/ButtonPrimary';
 
+// constants
 import Colors from '../constants/colors';
 
-// start game screen
+// start game screen component
 function StartGame({ onSelectNumber }) {
+    
+    // state for the entered number
     const [enteredNumber, setEnteredNumber] = useState('');
-
+    
+    // takes in the entered number and sets the state
     function numberInputHandler(enteredText) {
         setEnteredNumber(enteredText);
     }
 
+    // set chosen number and validate input when confirm is pressed
     function confirmInputHandler() {
         const chosenNumber = parseInt(enteredNumber);
+        // validate input and alert the user if necessary
         if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
             Alert.alert(
                 'Invalid Number!',
                 'Number has to be a number between 1 and 99.',
-                [
+                [ 
                     {
                         text: 'Okay',
                         style: 'destructive',
@@ -32,13 +41,18 @@ function StartGame({ onSelectNumber }) {
             );
             return;
         }
+        // set the chosen number
         onSelectNumber(chosenNumber);
     }
 
+    // reset the input when the reset button is pressed
     function resetInputHandler() {
-        setEnteredNumber("");
+        setEnteredNumber('');
     }
 
+    console.log("Entered number: ", enteredNumber);
+
+    // render the start game screen
     return (
         <View style={styles.screen}>
             <Title>Guess My Number</Title>
@@ -53,6 +67,7 @@ function StartGame({ onSelectNumber }) {
                     onChangeText={numberInputHandler}
                     value={enteredNumber}
                 />
+                
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
                         <ButtonPrimary onPress={confirmInputHandler}>
