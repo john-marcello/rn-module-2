@@ -1,14 +1,16 @@
+// dependencies
 import { useEffect, useMemo, useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+// components
 import NumberContainer from '../components/game/NumberContainer.js';
-
 import Card from '../components/ui/Card.js';
 import Title from '../components/ui/Title';
 import InputHint from '../components/ui/InputHint.js';
 import ButtonPrimary from '../components/ui/ButtonPrimary.js';
 
+// generate random number
 function generateRandomBetween(min, max, exclude) {
     let randNum;
     do {
@@ -21,24 +23,28 @@ function generateRandomBetween(min, max, exclude) {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-// play game screen
+// play game component
 function PlayGame({ userNumber, onGameOver }) {
+    // why do this?
     const initialGuess = useMemo(
         () => generateRandomBetween(minBoundary, maxBoundary, userNumber),
         []
     );
-
     useMemo(() => console.log(userNumber), []);
 
+    // state for the current guess
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
+    // check if the game is over else continue
     useEffect(() => {
         if (currentGuess === userNumber) {
             onGameOver();
         }
     }, [currentGuess, userNumber, onGameOver]);
 
+    // handle the next guess and set the new boundary
     function nextGuessHandler(direction) {
+        // validate the user's is within the correct range
         if (
             (direction === 'lower' && currentGuess < userNumber) ||
             (direction === 'higher' && currentGuess > userNumber)
@@ -49,23 +55,32 @@ function PlayGame({ userNumber, onGameOver }) {
                     style: 'cancel',
                 },
             ]);
+            // console.log('Invalid input');
             return;
+            
         }
 
+        // set the new boundary and generate a new random number
         if (direction === 'lower') {
             maxBoundary = currentGuess;
         } else {
             minBoundary = currentGuess + 1;
         }
-        console.log(minBoundary, maxBoundary);
+        // console.log(minBoundary, maxBoundary);
+
+        // generate the new random number
         const newRandomNumber = generateRandomBetween(
             minBoundary,
             maxBoundary,
             currentGuess
         );
+        // console.log(newRandomNumber);
+
+        // set the new guess
         setCurrentGuess(newRandomNumber);
     }
 
+    // render the play game screen
     return (
         <View style={styles.screen}>
             <Title>Opponent's Guess</Title>
