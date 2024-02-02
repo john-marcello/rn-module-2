@@ -10,6 +10,7 @@ export default InputHint;
 const styles = StyleSheet.create({
     inputHint: {
         color: Colors.accentLight,
-        fontSize: 16,
+        fontSize: 20,
+        fontFamily: 'OpenSans-Bold',
     },
 });

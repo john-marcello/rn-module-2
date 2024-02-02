@@ -15,7 +15,7 @@ import Colors from './constants/colors';
 export default function App() { 
     const [userNumber, setUserNumber] = useState();
     const [gameIsOver, setGameIsOver] = useState(true);
-    const [guessCount, setGuessCount] = useState(0);
+    const [roundsCount, setRoundsCount] = useState(0);
 
     // handling the selected number and game state from the StartGame screen
     function selectedNumberHandler(selectedNumber) {
@@ -24,13 +24,14 @@ export default function App() {
     }
 
     // handling the game over event from the PlayGame screen
-    function gameOverHandler() {
+    function gameOverHandler(numberRounds) {
         setGameIsOver(true);
+        setRoundsCount(numberRounds);
     }
 
     function startNewGameHandler() {
         setUserNumber(null);
-        setGuessCount(0);
+        setRoundsCount(0);
     }
 
     // conditional render screens based on game state
@@ -49,7 +50,7 @@ export default function App() {
             <GameOver 
                 onSelectNumber={selectedNumberHandler} 
                 userNumber={userNumber}
-                roundsNumber={guessCount}
+                roundsNumber={roundsCount}
                 onRestartGame={startNewGameHandler}
             />;
     }

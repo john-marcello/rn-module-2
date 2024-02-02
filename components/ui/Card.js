@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 8,
         marginHorizontal: 24,
-        padding: 16,
+        paddingVertical: 24,
+        paddingHorizontal: 16,
         backgroundColor: Colors.primaryDark,
         borderRadius: 8,
         elevation: 2, // android only

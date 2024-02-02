@@ -4,8 +4,7 @@ import Colors from '../../constants/colors';
 function GuessLogItem({roundNumber, guess}) {
   return (
     <View style={styles.listItem}>
-      <Text style={styles.itemText}>#{roundNumber}</Text>
-      <Text style={styles.itemText}>Opoonenent's Guess: {guess}</Text>
+      <Text style={styles.itemText}>{roundNumber}. Computer Guess = {guess}</Text>
     </View>
   );
 }
@@ -14,8 +13,9 @@ export default GuessLogItem;
 
 const styles = StyleSheet.create({
     listItem: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
+        alignContent: 'center',
         width: '100%',
         borderColor: Colors.primaryDark,
         borderWidth: 1,
@@ -31,5 +31,6 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontFamily: 'OpenSans-Regular',
+        fontSize: 20,
     },
 });

@@ -31,13 +31,12 @@ const styles = StyleSheet.create({
 
     buttonInnerContainer: {
         backgroundColor: Colors.primaryLight,
-        padding: 8,
-
+        padding: 16,
         elevation: 4, // android only
     },
     buttonText: {
         color: '#ffffff',
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
     },
