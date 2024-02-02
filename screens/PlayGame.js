@@ -1,6 +1,6 @@
 // dependencies
 import { useEffect, useMemo, useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 // components
@@ -9,6 +9,7 @@ import Card from '../components/ui/Card.js';
 import Title from '../components/ui/Title';
 import InputHint from '../components/ui/InputHint.js';
 import ButtonPrimary from '../components/ui/ButtonPrimary.js';
+import GuessLogItem from '../components/game/GuessLogItem.js';
 
 // generate random number
 function generateRandomBetween(min, max, exclude) {
@@ -20,27 +21,33 @@ function generateRandomBetween(min, max, exclude) {
     return randNum;
 }
 
+// initialize min and max boundary variables
 let minBoundary = 1;
 let maxBoundary = 100;
 
 // play game component
 function PlayGame({ userNumber, onGameOver }) {
-    // why do this?
     const initialGuess = useMemo(
-        () => generateRandomBetween(minBoundary, maxBoundary, userNumber),
-        []
+        () => generateRandomBetween(minBoundary, maxBoundary, userNumber), []
     );
     useMemo(() => console.log(userNumber), []);
 
     // state for the current guess
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    const [roundsCount, setRoundsCount] = useState([initialGuess]);
 
     // check if the game is over else continue
     useEffect(() => {
         if (currentGuess === userNumber) {
-            onGameOver();
+            onGameOver(roundsCount.length);
         }
     }, [currentGuess, userNumber, onGameOver]);
+
+    // reset min and max boundaries
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
 
     // handle the next guess and set the new boundary
     function nextGuessHandler(direction) {
@@ -55,9 +62,7 @@ function PlayGame({ userNumber, onGameOver }) {
                     style: 'cancel',
                 },
             ]);
-            // console.log('Invalid input');
             return;
-            
         }
 
         // set the new boundary and generate a new random number
@@ -66,7 +71,6 @@ function PlayGame({ userNumber, onGameOver }) {
         } else {
             minBoundary = currentGuess + 1;
         }
-        // console.log(minBoundary, maxBoundary);
 
         // generate the new random number
         const newRandomNumber = generateRandomBetween(
@@ -74,11 +78,16 @@ function PlayGame({ userNumber, onGameOver }) {
             maxBoundary,
             currentGuess
         );
-        // console.log(newRandomNumber);
 
         // set the new guess
         setCurrentGuess(newRandomNumber);
+        
+        // set the rounds count state
+        setRoundsCount((prevRounds) => [newRandomNumber, ...prevRounds]);
+
     }
+
+    const roundCountListLength = roundsCount.length;
 
     // render the play game screen
     return (
@@ -92,18 +101,31 @@ function PlayGame({ userNumber, onGameOver }) {
                         <ButtonPrimary
                             onPress={nextGuessHandler.bind(this, 'lower')}
                         >
-                            <Ionicons name='md-remove' />
+                            <Ionicons name='md-remove' size='24' />
                         </ButtonPrimary>
                     </View>
                     <View style={styles.buttonContainer}>
                         <ButtonPrimary
                             onPress={nextGuessHandler.bind(this, 'higher')}
                         >
-                            <Ionicons name='md-add' />
+                            <Ionicons name='md-add' size='24' />
                         </ButtonPrimary>
                     </View>
                 </View>
             </Card>
+            <View style={styles.listContainer}>
+                {/* {roundsCount.map((roundCount) => <Text key={roundCount}>{roundCount}</Text>)} */}
+                <FlatList
+                    data={roundsCount}
+                    renderItem={(itemData) => 
+                        <GuessLogItem 
+                            roundNumber={roundCountListLength - itemData.index} 
+                            guess={itemData.item} 
+                        />
+                    }
+                    keyExtractor={(item) => item}
+                />
+            </View>
         </View>
     );
 }
@@ -125,6 +147,12 @@ const styles = StyleSheet.create({
     },
     hintText: {
         marginBottom: 8,
-        
+    },
+    listContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        width: '100%', 
+        padding: 24,
+        alignItems: 'center',
     },
 });

@@ -9,7 +9,7 @@ import ButtonPrimary from '../components/ui/ButtonPrimary';
 import Colors from '../constants/colors';
 
 // game over component
-function GameOver() {
+function GameOver({roundsNumber, userNumber, onRestartGame}) {
     
     // render the game over screen
     return (
@@ -24,10 +24,10 @@ function GameOver() {
             </View>
             <View>
                 <Text style={styles.summaryText}>
-                    Your phone needed <Text style={styles.accentText}>X</Text> tries to
-                    guess the number <Text style={styles.accentText}>Y</Text>
+                    Your phone needed <Text style={styles.accentText}>{roundsNumber}</Text> tries to
+                    guess the number <Text style={styles.accentText}>{userNumber}</Text>
                 </Text>
-                <ButtonPrimary>Start Over</ButtonPrimary>
+                <ButtonPrimary onPress={onRestartGame}>Start Over</ButtonPrimary>
             </View>
         </View>
     );

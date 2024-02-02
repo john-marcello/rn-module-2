@@ -15,6 +15,7 @@ import Colors from './constants/colors';
 export default function App() { 
     const [userNumber, setUserNumber] = useState();
     const [gameIsOver, setGameIsOver] = useState(true);
+    const [roundsCount, setRoundsCount] = useState(0);
 
     // handling the selected number and game state from the StartGame screen
     function selectedNumberHandler(selectedNumber) {
@@ -23,8 +24,14 @@ export default function App() {
     }
 
     // handling the game over event from the PlayGame screen
-    function gameOverHandler() {
+    function gameOverHandler(numberRounds) {
         setGameIsOver(true);
+        setRoundsCount(numberRounds);
+    }
+
+    function startNewGameHandler() {
+        setUserNumber(null);
+        setRoundsCount(0);
     }
 
     // conditional render screens based on game state
@@ -39,7 +46,13 @@ export default function App() {
 
     // conditionally render the game over screen component
     if (gameIsOver && userNumber) {
-        screen = <GameOver onSelectNumber={selectedNumberHandler} />;
+        screen = 
+            <GameOver 
+                onSelectNumber={selectedNumberHandler} 
+                userNumber={userNumber}
+                roundsNumber={roundsCount}
+                onRestartGame={startNewGameHandler}
+            />;
     }
 
     // preload custom fonts with expo and useFonts hook
@@ -48,7 +61,6 @@ export default function App() {
             'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
             'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
         });
-        // console.log("Fonts loaded: ", fontsLoaded);
 
     if (!fontsLoaded) {
         return <Text>Loading...</Text>;
