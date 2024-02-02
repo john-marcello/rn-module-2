@@ -15,6 +15,7 @@ import Colors from './constants/colors';
 export default function App() { 
     const [userNumber, setUserNumber] = useState();
     const [gameIsOver, setGameIsOver] = useState(true);
+    const [guessCount, setGuessCount] = useState(0);
 
     // handling the selected number and game state from the StartGame screen
     function selectedNumberHandler(selectedNumber) {
@@ -25,6 +26,11 @@ export default function App() {
     // handling the game over event from the PlayGame screen
     function gameOverHandler() {
         setGameIsOver(true);
+    }
+
+    function startNewGameHandler() {
+        setUserNumber(null);
+        setGuessCount(0);
     }
 
     // conditional render screens based on game state
@@ -39,7 +45,13 @@ export default function App() {
 
     // conditionally render the game over screen component
     if (gameIsOver && userNumber) {
-        screen = <GameOver onSelectNumber={selectedNumberHandler} />;
+        screen = 
+            <GameOver 
+                onSelectNumber={selectedNumberHandler} 
+                userNumber={userNumber}
+                roundsNumber={guessCount}
+                onRestartGame={startNewGameHandler}
+            />;
     }
 
     // preload custom fonts with expo and useFonts hook

@@ -42,6 +42,12 @@ function PlayGame({ userNumber, onGameOver }) {
         }
     }, [currentGuess, userNumber, onGameOver]);
 
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
+
+
     // handle the next guess and set the new boundary
     function nextGuessHandler(direction) {
         // validate the user's is within the correct range
